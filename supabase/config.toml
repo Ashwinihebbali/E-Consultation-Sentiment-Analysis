@@ -1,0 +1,17 @@
+project_id = "dhtayekuffroserbqrqr"
+
+[auth]
+site_url = "http://localhost:3000"
+enabled = true
+
+[functions.analyze-sentiment]
+verify_jwt = false
+
+[functions.chatbot]
+verify_jwt = false
+
+[functions.send-feedback]
+verify_jwt = false
+
+[functions.analyze-face-emotion]
+verify_jwt = false
