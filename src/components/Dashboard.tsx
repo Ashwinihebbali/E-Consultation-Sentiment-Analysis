@@ -11,7 +11,6 @@ import { Download, TrendingUp, TrendingDown, Minus, Lightbulb, FileText } from "
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { useState } from "react";
 import html2canvas from "html2canvas";
 
@@ -77,7 +76,7 @@ const Dashboard = ({ results, onReset, isAnalyzing, currentAnalysis }: Dashboard
 
   const domainChartData = Object.values(domainData);
 
-  const handleFeedbackSubmit = async () => {
+  const handleFeedbackSubmit = () => {
     if (!feedbackName.trim() || !feedbackText.trim()) {
       toast({
         title: "Missing Information",
@@ -88,28 +87,24 @@ const Dashboard = ({ results, onReset, isAnalyzing, currentAnalysis }: Dashboard
     }
 
     setIsSubmitting(true);
-    try {
-      const { error } = await supabase.functions.invoke("send-feedback", {
-        body: { name: feedbackName, feedback: feedbackText },
-      });
+    
+    // Create mailto link for fully local feedback submission
+    const subject = encodeURIComponent("Feedback for Sentiment Analysis Tool");
+    const body = encodeURIComponent(`Name: ${feedbackName}\n\nFeedback:\n${feedbackText}`);
+    const mailtoUrl = `mailto:ashwinihebbali068@gmail.com?subject=${subject}&body=${body}`;
+    
+    // Open email client
+    window.location.href = mailtoUrl;
 
-      if (error) throw error;
-
+    // Simulate submission delay
+    setTimeout(() => {
       setFeedbackSubmitted(true);
+      setIsSubmitting(false);
       toast({
         title: "Thank You!",
-        description: "Your feedback has been submitted successfully",
+        description: "Your email client has been opened to submit feedback",
       });
-    } catch (error) {
-      console.error("Feedback error:", error);
-      toast({
-        title: "Submission Failed",
-        description: "Failed to submit feedback. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    }, 500);
   };
 
   const downloadChart = async (elementId: string, filename: string) => {

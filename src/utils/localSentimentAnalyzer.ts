@@ -43,6 +43,10 @@ export async function analyzeSentimentLocal(
     if (onProgress) {
       onProgress(i + 1, comments.length, analysisResult);
     }
+    
+    // Yield to the browser's event loop to prevent the UI from freezing
+    // This allows React to re-render the progress bar and buttons
+    await new Promise(resolve => setTimeout(resolve, 0));
   }
 
   return results;

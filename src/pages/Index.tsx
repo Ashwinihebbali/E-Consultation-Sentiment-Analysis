@@ -2,11 +2,8 @@ import { useState } from "react";
 import Hero from "@/components/Hero";
 import FileUpload from "@/components/FileUpload";
 import Dashboard from "@/components/Dashboard";
-import Chatbot from "@/components/Chatbot";
 import RealtimeAnalyzer from "@/components/RealtimeAnalyzer";
-import FaceSentimentDetector from "@/components/FaceSentimentDetector";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 import { analyzeSentimentLocal } from "@/utils/localSentimentAnalyzer";
 
 interface SentimentResult {
@@ -29,7 +26,7 @@ const Index = () => {
     try {
       toast({
         title: "Starting Local Analysis",
-        description: `Analyzing ${comments.length} comments in your browser...`,
+        description: `Analyzing ${comments.length} comments securely in your browser...`,
       });
 
       const results = await analyzeSentimentLocal(comments, (current, total, result) => {
@@ -44,7 +41,7 @@ const Index = () => {
       
       toast({
         title: "Analysis Complete!",
-        description: `Successfully analyzed ${results.length} comments`,
+        description: `Successfully analyzed ${results.length} comments locally`,
       });
     } catch (error) {
       console.error("Analysis error:", error);
@@ -61,51 +58,12 @@ const Index = () => {
     }
   };
 
-  const handleAnalyzeCloud = async (comments: string[]) => {
-    setIsAnalyzing(true);
-    
-    try {
-      toast({
-        title: "Starting Cloud Analysis",
-        description: `Analyzing ${comments.length} comments...`,
-      });
-
-      const { data, error } = await supabase.functions.invoke("analyze-sentiment", {
-        body: { comments },
-      });
-
-      if (error) {
-        const errorMessage = error.message || "Unknown error occurred";
-        throw new Error(errorMessage);
-      }
-
-      setResults(data.results);
-      
-      toast({
-        title: "Analysis Complete!",
-        description: `Successfully analyzed ${data.results.length} comments`,
-      });
-    } catch (error) {
-      console.error("Analysis error:", error);
-      const errorMessage = error instanceof Error ? error.message : "There was an error analyzing your data";
-      toast({
-        title: "Analysis Failed",
-        description: errorMessage,
-        variant: "destructive",
-      });
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Hero />
       <RealtimeAnalyzer />
-      <FaceSentimentDetector />
       <FileUpload
         onAnalyzeLocal={handleAnalyzeLocal}
-        onAnalyzeCloud={handleAnalyzeCloud}
         isAnalyzing={isAnalyzing}
         analysisProgress={analysisProgress}
       />
@@ -121,7 +79,6 @@ const Index = () => {
           currentAnalysis={currentAnalysis}
         />
       )}
-      <Chatbot analysisResults={results} />
     </div>
   );
 };
