@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { PieChart, Pie, BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from "recharts";
-import ReactWordcloud from "react-wordcloud";
+import WordCloud from "@/components/WordCloud";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -661,11 +661,9 @@ const Dashboard = ({ results, onReset, isAnalyzing, currentAnalysis }: Dashboard
                 <CardContent>
                   <div id="positive-cloud" className="h-[300px]">
                     {positiveWords.length > 0 ? (
-                      <ReactWordcloud
+                      <WordCloud
                         words={positiveWords}
                         options={{
-                          rotations: 1,
-                          rotationAngles: [0, 0],
                           fontSizes: [12, 40],
                           colors: ["hsl(var(--success))"],
                         }}
@@ -696,11 +694,9 @@ const Dashboard = ({ results, onReset, isAnalyzing, currentAnalysis }: Dashboard
                 <CardContent>
                   <div id="negative-cloud" className="h-[300px]">
                     {negativeWords.length > 0 ? (
-                      <ReactWordcloud
+                      <WordCloud
                         words={negativeWords}
                         options={{
-                          rotations: 1,
-                          rotationAngles: [0, 0],
                           fontSizes: [12, 40],
                           colors: ["hsl(var(--error))"],
                         }}
@@ -731,11 +727,9 @@ const Dashboard = ({ results, onReset, isAnalyzing, currentAnalysis }: Dashboard
                 <CardContent>
                   <div id="neutral-cloud" className="h-[300px]">
                     {neutralWords.length > 0 ? (
-                      <ReactWordcloud
+                      <WordCloud
                         words={neutralWords}
                         options={{
-                          rotations: 1,
-                          rotationAngles: [0, 0],
                           fontSizes: [12, 40],
                           colors: ["hsl(var(--warning))"],
                         }}
