@@ -1,5 +1,5 @@
  # 🎭 Sentiment Analysis Platform 
-
+ 
 A comprehensive AI-powered sentiment analysis platform that analyzes emotions from both text data and facial expressions in real-time.
 
 ![Sentiment Analysis](https://img.shields.io/badge/AI-Sentiment%20Analysis-blue)
