@@ -1,4 +1,4 @@
- # 🎭 Sentiment Analysis Platform           
+ # 🎭 Sentiment Analysis Platform            
  
 A Sentiment analysis platform that analyzes emotions from both text data. 
 
