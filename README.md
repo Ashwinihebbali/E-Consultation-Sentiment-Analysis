@@ -4,7 +4,7 @@ A Sentiment analysis platform that analyzes emotions from both text data.
 
 ![Sentiment Analysis](https://img.shields.io/badge/AI-Sentiment%20Analysis-blue)
 ![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?logo=typescript) 
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwindcss)
 ![Supabase](https://img.shields.io/badge/Supabase-Cloud-3ECF8E?logo=supabase)
 
