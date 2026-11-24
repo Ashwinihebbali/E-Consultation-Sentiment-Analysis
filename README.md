@@ -8,7 +8,7 @@ A Sentiment analysis platform that analyzes emotions from both text data.
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwindcss)
 ![Supabase](https://img.shields.io/badge/Supabase-Cloud-3ECF8E?logo=supabase)
 
-## ✨ Features
+## ✨ Features 
 
 ### 📝 Text Sentiment Analysis
 - **File Upload**: Support for CSV and TXT files containing comments
